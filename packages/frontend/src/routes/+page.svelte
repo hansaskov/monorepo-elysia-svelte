@@ -1,2 +1,31 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<script lang="ts">
+    import type { Treaty } from "@elysiajs/eden";
+    import { api } from "$lib/eden"
+
+    let response: Promise<Treaty.TreatyResponse<{ 200: string; }>>
+
+    function onclick() {
+        response = api.hello.get()
+    }
+
+</script>
+
+<button {onclick}>
+	Send request
+</button>
+
+
+
+{#await response}
+    <p>Loading...</p>
+
+{:then {data, error}}
+
+    {#if !error}
+        <p>Successful response: </p> {data}
+    {:else}
+        <p>Error response: </p> {error.value}
+    {/if}
+{:catch error}
+    <p>{error.message}</p>
+{/await}

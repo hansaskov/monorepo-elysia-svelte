@@ -4,6 +4,7 @@
   "module": "src/index.ts",
   "scripts": {
     "dev": "bun  --watch src/index.ts",
+    "build": "bun build --compile --minify-whitespace --minify-syntax --target bun --outfile backend ./src/index.ts",
     "lint": "bunx @biomejs/biome check src",
     "lint:fix": "bun lint --write",
     "db:generate": "bunx drizzle-kit generate",
@@ -11,16 +12,18 @@
     "db:migrate": "bun migration:generate && bun migration:push"
   },
   "dependencies": {
-    "elysia": "^1.1.25",
-    "drizzle-orm": "^0.36.3",
-    "postgres": "^3.4.5",
+    "@bogeychan/elysia-logger": "^0.1.4",
+    "@elysiajs/cors": "^1.1.1",
     "@elysiajs/swagger": "^1.1.6",
-    "@bogeychan/elysia-logger": "^0.1.4"
+    "drizzle-orm": "^0.36.3",
+    "elysia": "^1.1.25",
+    "postgres": "^3.4.5"
   },
   "devDependencies": {
     "typescript": "^5.6.3",
-    "@types/bun": "^1.1.13",
+    "@types/bun": "latest",
     "@biomejs/biome": "^1.9.4",
     "drizzle-kit": "^0.28.1"
-  }
+  },
+  "type": "module"
 }
