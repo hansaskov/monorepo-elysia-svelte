@@ -27,16 +27,14 @@
 </button>
 
 
-{#await response}
+{#await response} 
     <p>Loading...</p>
-
-{:then {data, error}}
-
-    {#if !error}
-        <p>Successful response: {data} </p> 
-    {:else}
-        <p>Error response: {error.value}</p> 
-    {/if}
 {:catch error}
     <p>{error.message}</p>
+{:then {data, error}}
+    {#if error}
+        <p>Error response: {error.value}</p> 
+    {:else}
+        <p>Successful response: {data} </p> 
+    {/if}
 {/await}
