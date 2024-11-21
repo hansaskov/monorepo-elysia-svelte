@@ -31,6 +31,13 @@ bun dev
 ```
 
 ## Building the project
+
+#### Docker
+```bash
+docker compose build
+```
+Will build the `frontend` and `backend` docker images
+
 #### Backend
 ```bash
 cd packages/backend
@@ -44,14 +51,6 @@ cd packages/frontend
 bun dev
 ```
 The static files can be found in ``/build``
-
-
-#### Docker
-```bash
-docker compose build
-```
-Will build the `frontend` and `backend` docker images
-
 
 
 ## FAQ
