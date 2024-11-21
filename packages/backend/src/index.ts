@@ -1,11 +1,15 @@
 import { logger } from "@bogeychan/elysia-logger";
 import cors from "@elysiajs/cors";
 import { swagger } from "@elysiajs/swagger";
-import { Elysia } from "elysia";
+import { Elysia, t } from "elysia";
 
 
 const api = new Elysia({prefix: "/api"})
-	.get("/hello", "Hello World");
+	.get("/hello", ({query}) => `Hello ${query.name}`, {
+		query: t.Object({
+			name: t.String()
+		})
+	})
 
 const app = new Elysia()
 	.use(logger())

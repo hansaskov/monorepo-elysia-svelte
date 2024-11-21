@@ -12,24 +12,46 @@ bun install
 
 ## Running the project
 
-### Backend
+#### Docker compose
+```bash
+docker compose up --build
+```
 
+## Running individually
+#### Backend
 ```bash
 cd packages/backend
 bun dev
 ```
 
-### Frontend
+#### Frontend
 ```bash
 cd packages/frontend
 bun dev
 ```
 
+## Building the project
+#### Backend
+```bash
+cd packages/backend
+bun run build
+```
+The command will create a binary executeable with the name of ``backend``
+
+#### Frontend
 ```bash
 cd packages/frontend
-bun run build
-bun preview
+bun dev
 ```
+The static files can be found in ``/build``
+
+
+#### Docker
+```bash
+docker compose build
+```
+Will build the `frontend` and `backend` docker images
+
 
 
 ## FAQ
