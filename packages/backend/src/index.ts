@@ -1,13 +1,18 @@
 import { logger } from "@bogeychan/elysia-logger";
 import cors from "@elysiajs/cors";
 import { swagger } from "@elysiajs/swagger";
-import { Elysia, t } from "elysia";
+import { Elysia } from "elysia";
+
+
+const api = new Elysia({prefix: "/api"})
+	.get("/hello", "Hello World");
 
 const app = new Elysia()
 	.use(logger())
-	.use(cors({origin: true}))
+	.use(cors())
 	.use(swagger())
-	.get("/hello", "Hello World");
+	.use(api)
+	
 
 app.listen(process.env.PORT as string, () =>
 	console.log(`🦊 Server started at ${app.server?.url.origin}`),
