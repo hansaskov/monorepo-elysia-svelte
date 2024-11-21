@@ -24,3 +24,14 @@ bun dev
 cd packages/frontend
 bun dev
 ```
+
+```bash
+cd packages/frontend
+bun run build
+bun preview
+```
+
+
+## FAQ
+How to get rid of the error "bundler' can only be used when 'module' is set to 'preserve' or to 'es2015' or later.ts"
+A: I fixed the error by building the frontend. Unknown to me, this seemed to solve some internal conflict. 
