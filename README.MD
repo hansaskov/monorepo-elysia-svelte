@@ -2,25 +2,32 @@
 
 This is an example monorepo using [Elysia](https://github.com/elysiajs/elysia) for the backend and [SvelteKit](https://kit.svelte.dev/) for the frontend. It leverages [Eden](https://github.com/elysiajs/eden) to provide end-to-end type safety.
 
+
+
 ## Getting Started
 
 To get the project up and running, follow these steps:
 
-### 1. Download the Project
+### 1. Prerequisites
+Make sure you have the following installed:
+- [Docker](https://docs.docker.com/get-started/get-docker/)
+- [Bun](https://bun.sh/)
 
-First, you'll need to clone the repository and install the required dependencies.
+### 2. Download the Project
+
+Then you'll need to clone the repository.
 
 ```bash
 git clone https://github.com/hansaskov/monorepo-elysia-svelte.git
 cd monorepo-elysia-svelte
-bun install
 ```
 
-- **`git clone`**: Downloads the project files from the repository.
-- **`cd monorepo-elysia-svelte`**: Navigates into the project folder.
-- **`bun install`**: Installs all the necessary dependencies. If you're not familiar with `bun`, it's a fast JavaScript runtime like Node.js.
-
-### 2. Create the `.env` File
+### 3. Install the Dependencies
+This project uses a monorepo structure, running `bun install` will install all the dependencies, for both the backend and frontend.
+```bash
+bun install
+```
+### 4. Create the `.env` File
 
 You need to set up environment variables for the project. These values help configure things like which domain to serve the app on. 
 
@@ -43,7 +50,7 @@ docker compose up --build --watch
 
 Let's break down this command:
 
-- **`docker compose up`**: This starts all the services defined in your `docker-compose.yaml` file (like the backend API, frontend, or database) and keeps them running.
+- **`docker compose up`**: This starts all the services defined in the `docker-compose.yaml` file (like the backend API, frontend, or database) and keeps them running.
   
 - **`--build`**: This flag forces Docker to rebuild the images for your services (both backend and frontend) before starting them. This ensures that you're working with the most up-to-date version of your code.
 
