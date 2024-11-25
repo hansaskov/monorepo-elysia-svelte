@@ -1,5 +1,4 @@
 import { logger } from "@bogeychan/elysia-logger";
-import { swagger } from "@elysiajs/swagger";
 import { Elysia, t } from "elysia";
 
 const api = new Elysia({ prefix: "/api" }).get(
@@ -14,7 +13,6 @@ const api = new Elysia({ prefix: "/api" }).get(
 
 const app = new Elysia()
 	.use(logger())
-	.use(swagger())
 	.use(api);
 
 app.listen(process.env.PORT as string, () =>
