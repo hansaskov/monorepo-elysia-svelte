@@ -22,7 +22,7 @@ cp .env.example .env
 ```bash
 docker compose up --build --watch
 ```
-Will start the project in dev mode with hot reloading
+Will start the project in dev mode with hot reloading at http://localhost:3000 or the domain set as APP_FQDN in .env
 
 #### Docker compose for production
 ```bash
