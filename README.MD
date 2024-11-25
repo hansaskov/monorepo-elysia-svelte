@@ -1,74 +1,145 @@
 # Monorepo Elysia Svelte
 
-Example monorepo with elysia and sveltekit using eden to achieve end to end type safety.
+This is an example monorepo using [Elysia](https://github.com/elysiajs/elysia) for the backend and [SvelteKit](https://kit.svelte.dev/) for the frontend. It leverages [Eden](https://github.com/elysiajs/eden) to provide end-to-end type safety.
 
 ## Getting Started
 
-#### Download the project
+To get the project up and running, follow these steps:
+
+### 1. Download the Project
+
+First, you'll need to clone the repository and install the required dependencies.
+
 ```bash
 git clone https://github.com/hansaskov/monorepo-elysia-svelte.git
 cd monorepo-elysia-svelte
 bun install
 ```
-#### Create .env file
-Copy the .env.example file to .env and fill in the values
+
+- **`git clone`**: Downloads the project files from the repository.
+- **`cd monorepo-elysia-svelte`**: Navigates into the project folder.
+- **`bun install`**: Installs all the necessary dependencies. If you're not familiar with `bun`, it's a fast JavaScript runtime like Node.js.
+
+### 2. Create the `.env` File
+
+You need to set up environment variables for the project. These values help configure things like which domain to serve the app on. 
+
 ```bash
 cp .env.example .env
-``` 
+```
 
-## Running the project
+- **`cp .env.example .env`**: This copies the example `.env` file into a new `.env` file, which you can then edit to fill in your own values.
 
-#### Docker compose for development
+
+## Running the Project
+
+### Development Mode
+
+If you're working on the project locally and want to see live changes as you work, use the following command:
+
 ```bash
 docker compose up --build --watch
 ```
-Will start the project in dev mode with hot reloading at http://localhost:3000 or the domain set as APP_FQDN in .env
 
-#### Docker compose for production
+Let's break down this command:
+
+- **`docker compose up`**: This starts all the services defined in your `docker-compose.yaml` file (like the backend API, frontend, or database) and keeps them running.
+  
+- **`--build`**: This flag forces Docker to rebuild the images for your services (both backend and frontend) before starting them. This ensures that you're working with the most up-to-date version of your code.
+
+- **`--watch`**: This enables "hot reloading" in development mode. Docker will automatically watch your files for changes and rebuild/restart the services as needed, so you don't have to manually restart the project after each change.
+
+Once the command is running, the project will be available at:
+- [http://localhost:3000](http://localhost:3000) if no custom domain is set, or
+- The domain specified by `APP_FQDN` in your `.env` file.
+
+### Production Mode
+
+When you're ready to deploy the project for real (in a production environment), use this command:
+
 ```bash
 docker compose -f compose.yaml up --build -d
 ```
-Will compile the backend and build the static frontend, then start the services in the background. 
 
-> [!NOTE]  
-> Production will only work on port 80 or 443
+Let’s break down each part:
 
-## Running individually
-#### Backend
+- **`docker compose -f compose.yaml`**: Same as the previous example, but now we exclute the compose.override.yaml file, which was used to define a local development environment.
+
+- **`up`**: This starts all the services just like in development mode.
+
+- **`--build`**: Similar to the development mode, this flag forces Docker to rebuild all the images.
+
+- **`-d`**: The `-d` stands for "detached mode." This means Docker will run the services in the background. Once the services are up and running, you can safely close your terminal, and the services will continue to run.
+
+> **Note**: Production mode is set to work only on these standard ports (80 and 443). This is typical for web servers, ensuring compatibility with browsers and users’ requests over HTTP/HTTPS.
+
+
+
+## Running the Backend and Frontend Individually
+
+You might want to run only the backend or frontend separately during development.
+
+### Running the Backend
+Navigate to the backend directory and start the development server.
+
 ```bash
 cd packages/backend
 bun dev
 ```
 
-#### Frontend
+### Running the Frontend
+
+Similarly, you can start the frontend by navigating to the frontend directory:
+
 ```bash
 cd packages/frontend
 bun dev
 ```
 
-## Building the project
+---
 
-#### Docker
+## Building the Project
+
+When you're ready to build the project for deployment, you can use the following commands:
+
+### Docker Build
+
+To build both the frontend and backend as Docker images, use:
+
 ```bash
 docker compose build
 ```
-Will build the `frontend` and `backend` docker images
 
-#### Backend
+This command packages your backend and frontend into Docker images, which are ready for deployment.
+
+### Building the Backend Manually
+
+If you only want to build the backend (e.g., if you're deploying only the API):
+
 ```bash
 cd packages/backend
 bun run build
 ```
-The command will create a binary executeable with the name of ``backend``
 
-#### Frontend
+This creates an executable binary called `backend`, which can be run on the server.
+
+### Building the Frontend Manually
+
+For the frontend, running this command will generate static files:
+
 ```bash
 cd packages/frontend
 bun dev
 ```
-The static files can be found in ``/build``
 
+The static files for your website will be available in the `/build` folder, ready to be deployed to a static hosting provider.
+
+---
 
 ## FAQ
-How to get rid of the error "bundler' can only be used when 'module' is set to 'preserve' or to 'es2015' or later.ts"
-A: I fixed the error by building the frontend. Unknown to me, this seemed to solve some internal conflict. 
+
+**Q: How do I fix the error: "'bundler' can only be used when 'module' is set to 'preserve' or 'es2015' or later.ts"?**
+
+**A**: This error can be resolved by building the frontend. This seems to clear up some internal conflict in the project.
+
+Feel free to reach out for further clarifications or questions!
