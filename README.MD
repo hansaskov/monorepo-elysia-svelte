@@ -28,7 +28,7 @@ Will start the project in dev mode with hot reloading
 ```bash
 docker compose -f compose.yaml up --build
 ```
-Will start the project in the background. 
+Will compile the backend and build the static frontend, then start the services in the background. 
 
 > [!NOTE]  
 > Production will only work on port 80 or 443
