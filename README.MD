@@ -26,7 +26,7 @@ Will start the project in dev mode with hot reloading at http://localhost:3000 o
 
 #### Docker compose for production
 ```bash
-docker compose -f compose.yaml up --build
+docker compose -f compose.yaml up --build -d
 ```
 Will compile the backend and build the static frontend, then start the services in the background. 
 
