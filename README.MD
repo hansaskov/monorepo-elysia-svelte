@@ -114,7 +114,7 @@ When you're ready to build the project for deployment, you can use the following
 To build both the frontend and backend as Docker images, use:
 
 ```bash
-docker compose build
+docker compose -f compose.yaml build
 ```
 
 This command packages your backend and frontend into Docker images, which are ready for deployment.
