@@ -1,9 +1,6 @@
 # Use Bun (JavaScript runtime) image as the base
 FROM oven/bun:1 AS build
 
-# Install xdg-utils to enable xdg-open for opening URLs in browser. Will cause an error otherwise
-RUN apt-get update && apt-get install -y xdg-utils
-
 # Set the working directory to /app inside the container
 WORKDIR /app
 
