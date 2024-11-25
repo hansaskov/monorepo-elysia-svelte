@@ -23,7 +23,7 @@ cd monorepo-elysia-svelte
 ```
 
 ### 3. Install the Dependencies
-This project uses a monorepo structure, running `bun install` will install all the dependencies, for both the backend and frontend.
+This project uses a monorepo structure, running `bun install` will install all the dependencies, for both the backend and frontend. Make sure this is run from the root of the project.
 ```bash
 bun install
 ```
