@@ -4,18 +4,31 @@ Example monorepo with elysia and sveltekit using eden to achieve end to end type
 
 ## Getting Started
 
+#### Download the project
 ```bash
 git clone https://github.com/hansaskov/monorepo-elysia-svelte.git
 cd monorepo-elysia-svelte
 bun install
 ```
+#### Create .env file
+Copy the .env.example file to .env and fill in the values
+```bash
+cp .env.example .env
+``` 
 
 ## Running the project
 
 #### Docker compose
 ```bash
-docker compose up --build
+docker compose up --build -d
 ```
+Will start the project in the background
+
+#### Docker compose dev
+```bash
+docker compose up --build --watch
+```
+Will start the project in dev mode with hot reloading
 
 ## Running individually
 #### Backend

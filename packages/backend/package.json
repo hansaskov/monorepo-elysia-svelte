@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "@bogeychan/elysia-logger": "^0.1.4",
-    "@elysiajs/cors": "^1.1.1",
     "@elysiajs/swagger": "^1.1.6",
     "drizzle-orm": "^0.36.3",
     "elysia": "^1.1.25",

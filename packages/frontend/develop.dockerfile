@@ -1,14 +1,16 @@
-# Stage 1: Build the application
-FROM oven/bun AS build
+# Use Bun (JavaScript runtime) image as the base
+FROM oven/bun:1 AS build
 
+# Install xdg-utils to enable xdg-open for opening URLs in browser. Will cause an error otherwise
+RUN apt-get update && apt-get install -y xdg-utils
+
+# Set the working directory to /app inside the container
 WORKDIR /app
 
-# Cache packages
-COPY package.json package.json
-COPY bun.lockb bun.lockb
-
-COPY /packages/backend/package.json ./packages/backend/package.json
-COPY /packages/frontend/package.json ./packages/frontend/package.json
+# Copy necessary package files to install dependencies
+COPY bun.lockb package.json /app/
+COPY /packages/backend/package.json /app/packages/backend/
+COPY /packages/frontend/package.json /app/packages/frontend/
 
 # Install dependencies
 RUN bun install
@@ -22,6 +24,6 @@ WORKDIR /app/packages/frontend
 # Build your app
 RUN bun run build
 
-EXPOSE 5173
+CMD ["bunx", "vite", "dev"]
 
-CMD ["bun", "run", "dev"]
+EXPOSE 5173

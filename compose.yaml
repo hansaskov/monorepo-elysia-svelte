@@ -15,15 +15,16 @@ services:
   backend:
     build: 
       context: .
-      dockerfile: ./packages/backend/dockerfile
+      dockerfile: ./packages/backend/develop.dockerfile
     labels:
       caddy: "${APP_FQDN}"
       caddy.handle: /api/*
       caddy.handle.reverse_proxy: "{{upstreams 3000}}"
     develop:
       watch: 
-        - action: rebuild
-        - path: ./packages/backend
+        - action: sync
+          path: ./packages/backend
+          target: /app/packages/backend
 
   frontend:
     build: 

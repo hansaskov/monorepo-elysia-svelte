@@ -1,40 +1,34 @@
 <script lang="ts">
-    import type { Treaty } from "@elysiajs/eden";
-   
-    import { page } from "$app/stores";
-    import { treaty } from "@elysiajs/eden";
-    import type { App } from "backend"
+	import type { Treaty } from '@elysiajs/eden';
 
-    const api = treaty<App>($page.url.host).api;
+	import { page } from '$app/stores';
+	import { treaty } from '@elysiajs/eden';
+	import type { App } from 'backend';
 
-    let response: Promise<Treaty.TreatyResponse<{ 200: string; }>> 
-    let name: string
+	const api = treaty<App>($page.url.host).api;
 
-    function onclick() {
-        response = api.hello.get({
-            query: {
-                name: name
-            }
-        })
-    }
+	let response: Promise<Treaty.TreatyResponse<{ 200: string }>>;
+	let name: string;
 
+	function onclick() {
+		response = api.hello.get({
+			query: { name }
+		});
+	}
 </script>
 
-<input type="text" bind:value={name}>
+<input type="text" bind:value={name} />
 
-<button {onclick}>
-	Send request
-</button>
+<button {onclick}> Send Requests </button>
 
-
-{#await response} 
-    <p>Loading...</p>
+{#await response}
+	<p>Loading...</p>
+{:then { data, error }}
+	{#if error}
+		<p>Error response: {error.value}</p>
+	{:else}
+		<p>Yippy. I got the following result: {data}</p>
+	{/if}
 {:catch error}
-    <p>{error.message}</p>
-{:then {data, error}}
-    {#if error}
-        <p>Error response: {error.value}</p> 
-    {:else}
-        <p>Yippy. I got the following result: {data} </p> 
-    {/if}
+	<p>{error.message}</p>
 {/await}
