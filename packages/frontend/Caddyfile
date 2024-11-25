@@ -4,7 +4,6 @@
 	}
 }
 
-
 :5173  {
     root * /usr/share/caddy
     file_server

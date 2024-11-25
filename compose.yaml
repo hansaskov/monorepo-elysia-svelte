@@ -6,7 +6,6 @@ services:
       - "80:80"
       - "443:443"
       - "443:443/udp"
-      - "3000:3000"
     volumes:
       - caddy-data:/data
       - caddy-config:/config
@@ -15,33 +14,21 @@ services:
   backend:
     build: 
       context: .
-      dockerfile: ./packages/backend/develop.dockerfile
+      dockerfile: ./packages/backend/dockerfile
     labels:
       caddy: "${APP_FQDN}"
       caddy.handle: /api/*
       caddy.handle.reverse_proxy: "{{upstreams 3000}}"
-    develop:
-      watch: 
-        - action: sync
-          path: ./packages/backend
-          target: /app/packages/backend
 
   frontend:
     build: 
       context: .
-      dockerfile: ./packages/frontend/develop.dockerfile
+      dockerfile: ./packages/frontend/dockerfile
     labels:
       caddy: "${APP_FQDN}"
       # caddy.encode: zstd gzip
       caddy.reverse_proxy: "{{upstreams 5173}}"
-    develop: 
-      watch: 
-        - action: sync
-          path: ./packages/frontend
-          target: /app/packages/frontend
-
 
 volumes:
   caddy-data:
   caddy-config:
-  timescaledb-data:

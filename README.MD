@@ -18,17 +18,20 @@ cp .env.example .env
 
 ## Running the project
 
-#### Docker compose
-```bash
-docker compose up --build -d
-```
-Will start the project in the background
-
-#### Docker compose dev
+#### Docker compose for development
 ```bash
 docker compose up --build --watch
 ```
 Will start the project in dev mode with hot reloading
+
+#### Docker compose for production
+```bash
+docker compose -f compose.yaml up --build
+```
+Will start the project in the background. 
+
+> [!NOTE]  
+> Production will only work on port 80 or 443
 
 ## Running individually
 #### Backend
