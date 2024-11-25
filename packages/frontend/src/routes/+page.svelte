@@ -13,7 +13,7 @@
     function onclick() {
         response = api.hello.get({
             query: {
-                name
+                name: name
             }
         })
     }
@@ -35,6 +35,6 @@
     {#if error}
         <p>Error response: {error.value}</p> 
     {:else}
-        <p>Successful response: {data} </p> 
+        <p>Yippy. I got the following result: {data} </p> 
     {/if}
 {/await}

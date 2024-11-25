@@ -9,6 +9,8 @@
     "clean": "rm node_modules packages/backend/node_modules packages/frontend/node_modules bun.lockb packages/backend/bun.lockb packages/frontend/bun.lockb"
   },
   "trustedDependencies": [
-    "@biomejs/biome"
+    "@biomejs/biome",
+    "@sveltejs/kit",
+    "esbuild"
   ]
 }

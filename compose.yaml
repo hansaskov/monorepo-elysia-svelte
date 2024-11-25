@@ -20,15 +20,24 @@ services:
       caddy: "${APP_FQDN}"
       caddy.handle: /api/*
       caddy.handle.reverse_proxy: "{{upstreams 3000}}"
+    develop:
+      watch: 
+        - action: rebuild
+        - path: ./packages/backend
 
   frontend:
     build: 
       context: .
-      dockerfile: ./packages/frontend/dockerfile
+      dockerfile: ./packages/frontend/develop.dockerfile
     labels:
       caddy: "${APP_FQDN}"
-      caddy.encode: zstd gzip
-      caddy.reverse_proxy: "{{upstreams 8080}}"
+      # caddy.encode: zstd gzip
+      caddy.reverse_proxy: "{{upstreams 5173}}"
+    develop: 
+      watch: 
+        - action: sync
+          path: ./packages/frontend
+          target: /app/packages/frontend
 
 
 volumes:
